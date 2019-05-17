@@ -1,0 +1,23 @@
+{
+  "name": "project-y",
+  "version": "1.0.0",
+  "description": "MERN stack project with shopping app functionality",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samsoedien/project-Y.git"
+  },
+  "keywords": [
+    "shopping",
+    "app"
+  ],
+  "author": "Samsoedien",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/samsoedien/project-Y/issues"
+  },
+  "homepage": "https://github.com/samsoedien/project-Y#readme"
+}
