@@ -13,7 +13,8 @@ import './App.css';
 // import './App.scss';
 
 import Routes from './Routes';
-// import HeaderContainer from './containers/HeaderContainer';
+import Navbar from './components/layout/Navbar';
+import HeaderContainer from './containers/HeaderContainer';
 // import FooterContainer from './containers/FooterContainer';
 
 // Check for token
@@ -42,6 +43,7 @@ const App = () => (
     <MuiThemeProvider theme={theme}>
       <Router>
         <div className="app">
+          <HeaderContainer />
           {/* <Switch>
             <Route exact path="/home" component={HeaderContainer} />
             <Route path="/" render={() => <HeaderContainer onHomepage={false} />} />

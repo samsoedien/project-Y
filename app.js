@@ -9,6 +9,7 @@ const helmet = require('helmet');
 const compression = require('compression');
 const csrf = require('csurf');
 const uuidv4 = require('uuid/v4');
+const multer = require('multer');
 const dotenv = require('dotenv').config();
 
 const authRoutes = require('./routes/auth');
@@ -16,13 +17,56 @@ const authRoutes = require('./routes/auth');
 
 const app = express();
 
+// const csrfProtection = csrf();
+
+// const privateKey = fs.readFileSync('bin/server.key');
+// const certificate =  fs.readFileSync('bin/server.cert');
+
+const fileStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads');
+  },
+  filename: (req, file, cb) => {
+    cb(null, uuidv4() + path.extname(file.originalname));
+  }
+});
+
+const fileFilter = (req, file, cb) => {
+  if (
+    file.mimetype === 'image/png' ||
+    file.mimetype === 'image/jpg' ||
+    file.mimetype === 'image/jpeg'
+  ) {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+
 app.use(helmet());
 app.use(compression());
 app.use(morgan('dev'));
 // app.use(morgan('combined', { stream: accessLogStream }));
 
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+app.set('view engine', 'ejs');
+app.set('views', 'views');
+
+// const accessLogStream = fs.createWriteStream(
+//   path.join(__dirname, 'logs', 'access.log'),
+//   { flags: 'a' }
+// );
+
+
+// Multer Middleware
+app.use(
+  multer({ storage: fileStorage, fileFilter }).single('image'),
+);
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 
 // Handling CORS errors
 app.use((req, res, next) => {

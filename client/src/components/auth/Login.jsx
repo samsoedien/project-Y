@@ -13,14 +13,12 @@ import {
 } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons/';
 
-import IMG_URL from '../../assets/img/foodprinted_sidedish.jpg';
-
 const styles = theme => ({
   panelBackground: {
     minHeight: '100%',
     minWidth: '100%',
-    backgroundImage: `url(${IMG_URL})`,
-    backgroundSize: 'cover',
+    // backgroundImage: `url(${IMG_URL})`,
+    // backgroundSize: 'cover',
   },
   loginForm: {
     padding: '36px 16px',
