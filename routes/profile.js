@@ -10,6 +10,6 @@ router.get('/', (req, res, next) => res.send('Profile route'));
 
 router.get('/', authMiddleware, profileController.getProfile);
 
-// router.post('/', profileValidation, profileController.postProfile);
+router.post('/', [authMiddleware, profileValidation], profileController.postProfile);
 
 module.exports = router;
