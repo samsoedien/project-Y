@@ -5,7 +5,7 @@ const userController = require('../controllers/users');
 
 const router = express.Router();
 
-router.get('/', (req, res, next) => res.send('Users route'));
+router.get('/test', (req, res, next) => res.send('Users route is currently active'));
 
 router.post('/', userValidation, userController.postUser);
 

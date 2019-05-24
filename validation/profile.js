@@ -1,9 +1,10 @@
 const { check } = require('express-validator/check');
 
 module.exports = [
-  check('name', 'Name is required')
+  check('status', 'Status is required')
     .not()
     .isEmpty(),
-  check('email', 'Please include email').isEmail(),
-  check('password', 'Please enter password with 6 or more characters').isLength({ min: 6 })
+  check('skills', 'Skills is required')
+    .not()
+    .isEmpty(),
 ];
