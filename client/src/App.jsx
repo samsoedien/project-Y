@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
 import { Provider } from 'react-redux';
-import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 import { MuiThemeProvider } from '@material-ui/core';
 import setAuthToken from './utils/setAuthToken';
@@ -16,6 +17,9 @@ import Routes from './Routes';
 import Navbar from './components/layout/Navbar';
 import HeaderContainer from './containers/HeaderContainer';
 // import FooterContainer from './containers/FooterContainer';
+
+import Nav from './components/layout/Nav';
+import Landing from './components/layout/Landing';
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -40,22 +44,35 @@ if (localStorage.jwtToken) {
 
 const App = () => (
   <Provider store={store}>
-    <MuiThemeProvider theme={theme}>
-      <Router>
-        <div className="app">
-          <HeaderContainer />
-          {/* <Switch>
-            <Route exact path="/home" component={HeaderContainer} />
-            <Route path="/" render={() => <HeaderContainer onHomepage={false} />} />
-          </Switch> */}
-          <main className="app-main">
-            <Routes />
-          </main>
-          {/* <FooterContainer /> */}
-        </div>
-      </Router>
-    </MuiThemeProvider>
+    <Router>
+      <Fragment>
+        <Nav />
+        <main className="app-main">
+          <Routes />
+        </main>
+      </Fragment>
+    </Router>
   </Provider>
 );
+
+// const App = () => (
+//   <Provider store={store}>
+//     <MuiThemeProvider theme={theme}>
+//       <Router>
+//         <div className="app">
+//           <HeaderContainer />
+//           {/* <Switch>
+//             <Route exact path="/home" component={HeaderContainer} />
+//             <Route path="/" render={() => <HeaderContainer onHomepage={false} />} />
+//           </Switch> */}
+//           <main className="app-main">
+//             <Routes />
+//           </main>
+//           {/* <FooterContainer /> */}
+//         </div>
+//       </Router>
+//     </MuiThemeProvider>
+//   </Provider>
+// );
 
 export default App;

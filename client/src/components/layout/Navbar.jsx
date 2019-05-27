@@ -4,7 +4,7 @@ import { NavLink as Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 
 // import ScrollWrapper from '../wrappers/ScrollWrapper';
-import './Navbar.css';
+// import './Navbar.css';
 
 const Navbar = ({
   user,
