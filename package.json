@@ -9,6 +9,8 @@
     "server": "set PORT=4000 && nodemon server.js --ignore client",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "format": "prettier --write",
+    "pre-commit": "npm run format && git add .",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,7 +22,7 @@
     "shopping",
     "app"
   ],
-  "author": "Samsoedien",
+  "author": "N Samsoedien <contact@samsoedien.com> (https://samsoedien.com/)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/samsoedien/project-Y/issues"
@@ -54,6 +56,7 @@
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.17.2",
+    "husky": "^2.3.0",
     "nodemon": "^1.19.0"
   }
 }
