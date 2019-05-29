@@ -7,6 +7,7 @@ import AuthContainer from './containers/AuthContainer';
 import Landing from './components/layout/Landing';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
+import Dashboard from './components/dashboard/Dashboard';
 
 const Routes = () => (
   <Fragment>
@@ -14,9 +15,10 @@ const Routes = () => (
     <Switch>
       <Route exact path="/register" component={Register} />
       <Route exact path="/login" component={Login} />
+      <Route exact path="/dashboard" component={Dashboard} />
     </Switch>
-
-    {/* <Route exact path="/" component={LandingContainer} /> */}
+{/* 
+    <Route exact path="/" component={LandingContainer} />
     <Route
       exact
       path="/register"
@@ -26,7 +28,7 @@ const Routes = () => (
       exact
       path="/login"
       render={() => <AuthContainer hasAccount={true} />}
-    />
+    /> */}
   </Fragment>
 );
 

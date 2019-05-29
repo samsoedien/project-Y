@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { setAlert } from '../../actions/alertActions';
+import { registerUser } from '../../actions/authActions';
 
-const Register = () => {
-  const [ formData, setFormData ] = useState({
+const Register = ({ setAlert, registerUser, isAuthenticated }) => {
+  const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
@@ -12,14 +17,16 @@ const Register = () => {
 
   const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = e => {
+  const onSubmit = async e => {
     e.preventDefault();
     if (password !== passwordConfirm) {
-      console.log('passwords do not match');
+      setAlert('Passwords do not match', 'danger');
     } else {
-      console.log(formData);
+      registerUser({ name, email, password })
     }
   };
+
+  if (isAuthenticated) return <Redirect to="/dashboard" />;
 
   return (
     <div>
@@ -31,7 +38,6 @@ const Register = () => {
           name="name"
           value={name}
           onChange={e => onChange(e)}
-          required
         />
         <input
           type="email"
@@ -39,7 +45,6 @@ const Register = () => {
           name="email"
           value={email}
           onChange={e => onChange(e)}
-          required
         />
         <input
           type="password"
@@ -47,7 +52,6 @@ const Register = () => {
           name="password"
           value={password}
           onChange={e => onChange(e)}
-          required
         />
         <input
           type="password"
@@ -55,7 +59,6 @@ const Register = () => {
           name="passwordConfirm"
           value={passwordConfirm}
           onChange={e => onChange(e)}
-          required
         />
         <button type="submit" value="Submit">Signup</button>
       </form>
@@ -63,4 +66,16 @@ const Register = () => {
   );
 };
 
-export default Register;
+Register.propTypes = {
+  setAlert: PropTypes.func.isRequired,
+  registerUser: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool,
+};
+
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { setAlert, registerUser })(Register);
+
+// TODO: add 'required' in each input 

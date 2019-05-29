@@ -13,4 +13,6 @@ TODO FRONTEND:
 - Rewrite styling to SASS/SCSS
 - Add favicon
 - Implement media queries for responsiveness 
-- 
+- Rewrite token configuration in App.jsx in redux actions / reducers
+- Optimise errors and alerts actions 
+- Destructurize formdata in register / login forms
