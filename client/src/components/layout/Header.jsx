@@ -16,14 +16,14 @@ const Header = (
 ) => (
   <header className="header">
     <Navbar
-        user={user}
-        isAuthenticated={isAuthenticated}
-        isOpen={isOpen}
-        onNavbarToggleCallback={onNavbarToggleCallback}
-        onLogoutCallback={onLogoutCallback}
-        onHomepage={onHomepage}
-      />
-      {/* {onHomepage ? <HeroBanner /> : null} */}
+      user={user}
+      isAuthenticated={isAuthenticated}
+      isOpen={isOpen}
+      onNavbarToggleCallback={onNavbarToggleCallback}
+      onLogoutCallback={onLogoutCallback}
+      onHomepage={onHomepage}
+    />
+    {/* {onHomepage ? <HeroBanner /> : null} */}
   </header>
 );
 

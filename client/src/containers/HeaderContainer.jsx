@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutUser } from '../actions/authActions';
-import { clearCurrentProfile } from '../actions/profileActions';
+// import { clearCurrentProfile } from '../actions/profileActions';
 
 import Header from '../components/layout/Header';
 
@@ -29,7 +29,10 @@ class HeaderContainer extends Component {
   }
 
   render() {
-    const { auth: { isAuthenticated, user }, onHomepage } = this.props;
+    const {
+      auth: { isAuthenticated, user },
+      onHomepage,
+    } = this.props;
     const { isOpen } = this.state;
     return (
       <div className="navbar-container">
@@ -64,4 +67,7 @@ const mapStateToProps = state => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, { logoutUser, clearCurrentProfile })(HeaderContainer);
+export default connect(
+  mapStateToProps,
+  { logoutUser },
+)(HeaderContainer);

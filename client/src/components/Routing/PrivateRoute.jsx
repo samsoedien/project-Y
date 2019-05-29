@@ -11,7 +11,7 @@ const PrivateRoute = ({
   <Route
     {...rest}
     render={props =>
-      !auth.isAuthenticated && !loading ? (
+      !isAuthenticated && !loading ? (
         <Redirect to="/login" />
       ) : (
         <Component {...props} />
@@ -21,7 +21,10 @@ const PrivateRoute = ({
 );
 
 PrivateRoute.propTypes = {
-  auth: PropTypes.object.isRequired,
+  auth: PropTypes.shape({
+    isAuthenticated: PropTypes.bool,
+    loading: PropTypes.bool,
+  }).isRequired,
 };
 
 const mapStateToProps = state => ({

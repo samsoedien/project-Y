@@ -10,6 +10,7 @@ import {
   LOGOUT,
   USER_LOADED,
   AUTH_ERROR,
+  CLEAR_PROFILE,
   GET_ERRORS,
   SET_CURRENT_USER,
 } from '../constants/types';
@@ -35,16 +36,16 @@ export const loadUser = () => async dispatch => {
 export const registerUser = ({ name, email, password }) => async dispatch => {
   const config = {
     headers: {
-      'Content-Type': 'application/json'
-    }
-  }
+      'Content-Type': 'application/json',
+    },
+  };
   const body = JSON.stringify({ name, email, password });
   try {
     const res = await axios.post('/api/users', body, config);
     dispatch({
       type: REGISTER_SUCCESS,
       payload: res.data,
-    })
+    });
     dispatch(loadUser());
   } catch (err) {
     const errors = err.response.data.errors;
@@ -53,23 +54,23 @@ export const registerUser = ({ name, email, password }) => async dispatch => {
     }
     dispatch({
       type: REGISTER_FAIL,
-    })
+    });
   }
 };
 
 export const loginUser = (email, password) => async dispatch => {
   const config = {
     headers: {
-      'Content-Type': 'application/json'
-    }
-  }
+      'Content-Type': 'application/json',
+    },
+  };
   const body = JSON.stringify({ email, password });
   try {
     const res = await axios.post('/api/users', body, config);
     dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data,
-    })
+    });
     dispatch(loadUser());
   } catch (err) {
     const errors = err.response.data.errors;
@@ -78,25 +79,14 @@ export const loginUser = (email, password) => async dispatch => {
     }
     dispatch({
       type: LOGIN_FAIL,
-    })
+    });
   }
 };
 
 export const logoutUser = () => dispatch => {
+  dispatch({ type: CLEAR_PROFILE });
   dispatch({ type: LOGOUT });
 };
-
-
-
-
-
-
-
-
-
-
-
-
 
 // // Register User
 // export const registerUser = (userData, history) => dispatch => {
@@ -114,7 +104,6 @@ export const setCurrentUser = decoded => ({
   type: SET_CURRENT_USER,
   payload: decoded,
 });
-
 
 // // Login - Get User Token
 // export const loginUser = userData => dispatch => {

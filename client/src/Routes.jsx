@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import PrivateRouteWrapper from './helpers/PrivateRouteWrapper';
+import PrivateRoute from './components/routing/PrivateRoute';
 
 // import LandingContainer from './containers/LandingContainer';
 import AuthContainer from './containers/AuthContainer';
@@ -15,9 +16,9 @@ const Routes = () => (
     <Switch>
       <Route exact path="/register" component={Register} />
       <Route exact path="/login" component={Login} />
-      <Route exact path="/dashboard" component={Dashboard} />
+      <PrivateRoute exact path="/dashboard" component={Dashboard} />
     </Switch>
-{/* 
+    {/* 
     <Route exact path="/" component={LandingContainer} />
     <Route
       exact

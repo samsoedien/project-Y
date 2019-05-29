@@ -31,7 +31,7 @@ exports.postAuth = async (req, res, next) => {
       return res.status(400).json({ errors: [{ msg: 'Invalid credentials' }] });
     }
 
-    const isMatch = await bcrypt.compare(password, user.password); 
+    const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(400).json({ errors: [{ msg: 'Invalid credentials' }] });
     }
@@ -48,7 +48,7 @@ exports.postAuth = async (req, res, next) => {
       (err, token) => {
         if (err) throw err;
         res.json({ token });
-      }
+      },
     );
   } catch (err) {
     console.error(err.message);
@@ -102,3 +102,5 @@ exports.postAuth = async (req, res, next) => {
 // };
 
 // //FIXME: Modified: removed else statement in register NOT TESTED YET!!!!
+
+// FIXME: name is required fix
