@@ -102,5 +102,3 @@ exports.postAuth = async (req, res, next) => {
 // };
 
 // //FIXME: Modified: removed else statement in register NOT TESTED YET!!!!
-
-// FIXME: name is required fix
