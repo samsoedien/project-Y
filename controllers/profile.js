@@ -1,17 +1,17 @@
 const { check, validationResult } = require('express-validator/check');
-const gravatar = require('gravatar');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const config = require('config');
 
 const User = require('../models/User');
 const Profile = require('../models/Profile');
+const Post = require('../models/Post');
 
 exports.getProfile = async (req, res, next) => {
   try {
-    const profile = await Profile.findOne({ user: req.user.id }).populate('user', ['name', 'avatar']);
+    const profile = await Profile.findOne({ user: req.user.id }).populate(
+      'user',
+      ['name', 'avatar'],
+    );
     if (!profile) {
-      return res.status(400).json({ msg: 'There is no profile for this user' })
+      return res.status(400).json({ msg: 'There is no profile for this user' });
     }
     res.json(profile);
   } catch (err) {
@@ -99,7 +99,9 @@ exports.getAllProfiles = async (req, res, next) => {
 
 exports.getProfileById = async (req, res, next) => {
   try {
-    const profile = await Profile.findOne({ user: req.params.user_id }).populate('user', ['name', 'avatar']);
+    const profile = await Profile.findOne({
+      user: req.params.user_id,
+    }).populate('user', ['name', 'avatar']);
     if (!profile) {
       return res.status(400).json({ msg: 'There is no profile for this user' });
     }
@@ -114,10 +116,11 @@ exports.getProfileById = async (req, res, next) => {
 
 exports.deleteProfile = async (req, res, next) => {
   try {
-    // @todo remove user posts
-
-    // Remove profile and user
+    // Remove user post
+    await Post.deleteMany({ user: req.user.id });
+    // Remove profile
     await Profile.findOneAndRemove({ user: req.user.id });
+    // Remove user
     await User.findOneAndRemove({ _id: req.user.id });
 
     res.json({ msg: 'User deleted' });
@@ -132,15 +135,7 @@ exports.putProfileExperience = async (req, res, next) => {
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
-  const {
-    title,
-    company,
-    location,
-    from,
-    to,
-    current,
-    description,
-  } = req.body;
+  const { title, company, location, from, to, current, description } = req.body;
 
   const newExperience = {
     title,
@@ -160,7 +155,7 @@ exports.putProfileExperience = async (req, res, next) => {
 
     res.json(profile);
   } catch (err) {
-    console.error(err.message)
+    console.error(err.message);
     res.status(500).send('Server Error');
   }
 };

@@ -18,7 +18,9 @@ TODO FRONTEND:
 - Rewrite token configuration in App.jsx in redux actions / reducers
 - Optimise errors and alerts actions
 - Destructurize formdata in register / login forms
-- Rewrite class based components to functional useing React hooks
+- Seperate presentational components and container components
+- Rewrite class based components to functional using React hooks
+- Rewrite CreateProfile component to have logic for both create and edit functionality using ternary operator
 
 MISC:
 
