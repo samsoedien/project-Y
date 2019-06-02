@@ -1,81 +1,201 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { Link, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { setAlert } from '../../actions/alertActions';
-import { registerUser } from '../../actions/authActions';
+import { Link } from 'react-router-dom';
+import {
+  Avatar,
+  Button,
+  TextField,
+  FormControlLabel,
+  Checkbox,
+  Grid,
+  Box,
+  Typography,
+  Container,
+  InputAdornment,
+  IconButton,
+} from '@material-ui/core';
+import {
+  LockOutlined as LockOutlinedIcon,
+  Visibility,
+  VisibilityOff,
+} from '@material-ui/icons';
+import './Register.css';
 
-const Register = ({ setAlert, registerUser, isAuthenticated }) => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    passwordConfirm: '',
-  });
-
-  const { name, email, password, passwordConfirm } = formData;
-
-  const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
-
-  const onSubmit = async e => {
-    e.preventDefault();
-    if (password !== passwordConfirm) {
-      setAlert('Passwords do not match', 'danger');
-    } else {
-      registerUser({ name, email, password })
-    }
+const Register = ({
+  name,
+  email,
+  password,
+  passwordConfirm,
+  showPassword,
+  onChangeCallback,
+  onSubmitRegisterCallback,
+  onShowPasswordCallback,
+  errors,
+}) => {
+  const onChange = e => {
+    onChangeCallback(e);
   };
 
-  if (isAuthenticated) return <Redirect to="/dashboard" />;
+  const onSubmit = e => {
+    onSubmitRegisterCallback(e);
+  };
+
+  const onShowPasswordHandle = () => {
+    onShowPasswordCallback();
+  };
 
   return (
-    <div>
-      <h2>Register</h2>
-      <form onSubmit={e => onSubmit(e)} noValidate autoComplete="off">
-        <input
-          type="name"
-          placeholder="Name"
-          name="name"
-          value={name}
-          onChange={e => onChange(e)}
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          name="email"
-          value={email}
-          onChange={e => onChange(e)}
-        />
-        <input
-          type="password"
-          placholder="Password"
-          name="password"
-          value={password}
-          onChange={e => onChange(e)}
-        />
-        <input
-          type="password"
-          placholder="Confirm Password"
-          name="passwordConfirm"
-          value={passwordConfirm}
-          onChange={e => onChange(e)}
-        />
-        <button type="submit" value="Submit">Signup</button>
-      </form>
+    <div className="register">
+      <Container component="main" maxWidth="xs">
+        <div className="register__pane">
+          <Avatar className="register__pane__avatar">
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography variant="h5">Sign up</Typography>
+          <form
+            onSubmit={e => onSubmit(e)}
+            noValidate
+            autoComplete="off"
+            className="register__pane__form"
+          >
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  placeholder="Name"
+                  name="name"
+                  value={name}
+                  onChange={e => onChange(e)}
+                  autoComplete="fname"
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="firstName"
+                  label="First Name"
+                  autoFocus
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="lastName"
+                  label="Last Name"
+                  name="lastName"
+                  autoComplete="lname"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  type="email"
+                  placeholder="Email Address"
+                  name="email"
+                  value={email}
+                  onChange={e => onChange(e)}
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  autoComplete="email"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  type="password"
+                  placeholder="Password"
+                  name="password"
+                  value={password}
+                  onChange={e => onChange(e)}
+                  variant="outlined"
+                  required
+                  fullWidth
+                  label="Password"
+                  id="password"
+                  autoComplete="current-password"
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="Toggle password visibility"
+                          onClick={onShowPasswordHandle}
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  type="password"
+                  placeholder="Confirm Password"
+                  name="passwordConfirm"
+                  value={passwordConfirm}
+                  onChange={e => onChange(e)}
+                  variant="outlined"
+                  required
+                  fullWidth
+                  label=" Confirm Password"
+                  id="passwordConfirm"
+                  autoComplete="current-password"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <FormControlLabel
+                  control={
+                    <Checkbox value="allowExtraEmails" color="primary" />
+                  }
+                  label="I want to receive inspiration, marketing promotions and updates via email."
+                />
+              </Grid>
+            </Grid>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className="register__pane__form__submit"
+            >
+              Sign Up
+            </Button>
+            <Grid container justify="flex-end">
+              <Grid item>
+                <Link to="/login">
+                  <Typography variant="body2">
+                    Already have an account? Sign in
+                  </Typography>
+                </Link>
+              </Grid>
+            </Grid>
+          </form>
+          <Box mt={5}>
+            <Typography variant="body2" color="textSecondary" align="center">
+              Join us now
+            </Typography>
+          </Box>
+        </div>
+      </Container>
     </div>
   );
 };
 
 Register.propTypes = {
-  setAlert: PropTypes.func.isRequired,
-  registerUser: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool,
+  name: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
+  passwordConfirm: PropTypes.string.isRequired,
+  showPassword: PropTypes.string.isRequired,
+  onChangeCallback: PropTypes.func.isRequired,
+  onSubmitRegisterCallback: PropTypes.func.isRequired,
+  onShowPasswordCallback: PropTypes.func.isRequired,
+  errors: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+    passwordConfirm: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
-const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated,
-});
-
-export default connect(mapStateToProps, { setAlert, registerUser })(Register);
-
-// TODO: add 'required' in each input 
+export default Register;

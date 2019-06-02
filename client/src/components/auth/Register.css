@@ -1,0 +1,21 @@
+.register__pane {
+  margin-top: 48px;
+  padding-top: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.register__pane__avatar {
+  margin: 12px;
+  background-color: red;
+}
+
+.register__pane__form {
+  width: 100%;
+  margin-top: 24px;
+}
+
+.register__pane__form__submit {
+  margin: 24px 0 12px;
+}

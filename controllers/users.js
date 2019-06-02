@@ -70,7 +70,7 @@ exports.registerUser = async (req, res, next) => {
         res.json({ token });
       },
     );
-    res.send('User registered');
+    return res.status(201).json('User registered');
   } catch (err) {
     console.error(err.message);
     // res.status(500).send('Server error');

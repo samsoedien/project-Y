@@ -32,7 +32,7 @@ export const getCurrentProfile = () => async dispatch => {
 export const getProfiles = () => async dispatch => {
   dispatch({ type: CLEAR_PROFILE });
   try {
-    const res = await axios.get('api/profile/all');
+    const res = await axios.get('api/profiles/all');
     dispatch({
       type: GET_PROFILES,
       payload: res.data,
@@ -56,7 +56,7 @@ export const createProfile = (
         'Content-Type': 'application/json',
       },
     };
-    const res = await axios.post('/api/profile', formData, config);
+    const res = await axios.post('/api/profiles', formData, config);
     dispatch({
       type: GET_PROFILE,
       payload: res.data,
@@ -79,7 +79,7 @@ export const createProfile = (
 
 export const deleteExperience = id => async dispatch => {
   try {
-    const res = await axios.delete(`/api/profile/experience/${id}`);
+    const res = await axios.delete(`/api/profiles/experience/${id}`);
     dispatch({
       type: UPDATE_PROFILE,
       payload: res.data,
@@ -96,7 +96,7 @@ export const deleteExperience = id => async dispatch => {
 export const deleteAccount = () => async dispatch => {
   if (window.confirm('are you sure?')) {
     try {
-      const res = await axios.delete('/api/profile');
+      const res = await axios.delete('/api/profiles');
 
       dispatch({ type: CLEAR_PROFILE });
       dispatch({ type: ACCOUNT_DELETED });

@@ -8,6 +8,7 @@ import setAuthToken from './utils/setAuthToken';
 import { loadUser } from './actions/authActions';
 import { setCurrentUser, logoutUser } from './actions/authActions';
 import { clearCurrentProfile } from './actions/profileActions';
+import { CssBaseline } from '@material-ui/core';
 import store from './store/store';
 import theme from './theme/theme';
 import logo from './logo.svg';
@@ -26,7 +27,6 @@ import Landing from './components/layout/Landing';
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
-
 
 // // Check for token
 // if (localStorage.jwtToken) {
@@ -57,6 +57,7 @@ const App = () => {
     <Provider store={store}>
       <Router>
         <Fragment>
+          <CssBaseline />
           <Nav />
           <main className="app-main">
             <Alert />
@@ -66,7 +67,7 @@ const App = () => {
       </Router>
     </Provider>
   );
-}
+};
 // const App = () => (
 //   <Provider store={store}>
 //     <MuiThemeProvider theme={theme}>
