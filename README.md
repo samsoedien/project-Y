@@ -9,6 +9,8 @@ TODO BACKEND:
 - Add status codes for each response
 - End each controller exports with return
 - Conduct unit testing
+- Look into express validator differences between check and body methods
+- Decide on seperating responses for validation specific errors
 
 TODO FRONTEND:
 

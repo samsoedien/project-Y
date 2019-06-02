@@ -12,7 +12,8 @@ const Login = ({ loginUser, isAuthenticated }) => {
 
   const { email, password } = formData;
 
-  const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
+  const onChange = e =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = async e => {
     e.preventDefault();
@@ -41,7 +42,9 @@ const Login = ({ loginUser, isAuthenticated }) => {
           onChange={e => onChange(e)}
           required
         />
-        <button type="submit" value="Submit">Signup</button>
+        <button type="submit" value="Submit">
+          Signup
+        </button>
       </form>
     </div>
   );
@@ -56,6 +59,9 @@ const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { loginUser })(Login);
+export default connect(
+  mapStateToProps,
+  { loginUser },
+)(Login);
 
 // TODO: Revise mapStateToProps

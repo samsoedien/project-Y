@@ -1,159 +1,102 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Link, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { setAlert } from '../actions/alertActions';
 import { registerUser, loginUser } from '../actions/authActions';
 
 import Register from '../components/auth/Register';
 import Login from '../components/auth/Login';
 
-class AuthContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: '',
-      email: '',
-      password: '',
-      passwordConfirm: '',
-      image: '',
-      showPassword: false,
-      errors: {},
-    };
-    this.onChangeCallback = this.onChangeCallback.bind(this);
-    this.onSubmitRegisterCallback = this.onSubmitRegisterCallback.bind(this);
-    this.onSubmitLoginCallback = this.onSubmitLoginCallback.bind(this);
-    this.onShowPasswordCallback = this.onShowPasswordCallback.bind(this);
-  }
+const AuthContainer = ({
+  setAlert,
+  registerUser,
+  loginUser,
+  auth: { isAuthenticated },
+  hasAccount,
+}) => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    passwordConfirm: '',
+    showPassword: false,
+    errors: {},
+  });
+  const {
+    name,
+    email,
+    password,
+    passwordConfirm,
+    showPassword,
+    errors,
+  } = formData;
 
-  componentDidMount() {
-    const { auth: { isAuthenticated }, history } = this.props;
-    if (isAuthenticated) {
-      history.push('/dashboard');
+  const onChangeCallback = e =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const onSubmitRegisterCallback = async e => {
+    e.preventDefault();
+    if (password !== passwordConfirm) {
+      setAlert('Passwords do not match', 'danger');
+    } else {
+      registerUser({ name, email, password });
     }
-  }
+  };
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.auth.isAuthenticated) {
-      const { history } = this.props;
-      history.push('/dashboard');
-    }
-    if (nextProps.errors) {
-      this.setState({ errors: nextProps.errors });
-    }
-  }
+  const onSubmitLoginCallback = async e => {
+    e.preventDefault();
+    loginUser({ email, password });
+  };
 
-  onChangeCallback(e) {
-    switch (e.target.name) {
-      case 'image':
-        this.setState({ image: e.target.files[0] });
-        break;
-      default:
-        this.setState({ [e.target.name]: e.target.value });
-    }
-  }
+  const onShowPasswordCallback = () => {
+    console.log('setState showpassword');
+  };
 
-  onSubmitRegisterCallback() {
-    const {
-      name,
-      email,
-      password,
-      passwordConfirm,
-      image,
-    } = this.state;
-    // const newUser = {
-    //   name,
-    //   email,
-    //   password,
-    //   passwordConfirm,
-    // };
+  if (isAuthenticated) return <Redirect to="/dashboard" />;
 
-    const newUser = new FormData();
-    newUser.append('name', name);
-    newUser.append('email', email);
-    newUser.append('password', password);
-    newUser.append('passwordConfirm', passwordConfirm);
-    newUser.append('image', image);
-
-    const { registerUser, history } = this.props;
-    registerUser(newUser, history);
-  }
-
-  onSubmitLoginCallback() {
-    const { email, password } = this.state;
-    const userData = {
-      email,
-      password,
-    };
-    const { loginUser } = this.props;
-    loginUser(userData);
-  }
-
-  onShowPasswordCallback() {
-    this.setState(prevState => ({
-      showPassword: !prevState.showPassword,
-    }));
-  }
-
-  render() {
-    const { hasAccount } = this.props;
-    const {
-      name,
-      email,
-      password,
-      passwordConfirm,
-      image,
-      showPassword,
-      errors,
-    } = this.state;
-    return (
-      <div className="auth-container">
-        {hasAccount ? (
-          <Login
-            email={email}
-            password={password}
-            showPassword={showPassword}
-            image={image}
-            onChangeCallback={this.onChangeCallback}
-            onSubmitLoginCallback={this.onSubmitLoginCallback}
-            onShowPasswordCallback={this.onShowPasswordCallback}
-            errors={errors}
-          />
-        ) : (
-            <Register
-              name={name}
-              email={email}
-              password={password}
-              passwordConfirm={passwordConfirm}
-              showPassword={showPassword}
-              onChangeCallback={this.onChangeCallback}
-              onSubmitRegisterCallback={this.onSubmitRegisterCallback}
-              onShowPasswordCallback={this.onShowPasswordCallback}
-              errors={errors}
-            />
-          )}
-      </div>
-    );
-  }
-}
+  return (
+    <div className="auth-container">
+      {!hasAccount ? (
+        <Register
+          name={name}
+          email={email}
+          password={password}
+          passwordConfirm={passwordConfirm}
+          showPassword={showPassword}
+          onChangeCallback={onChangeCallback}
+          onSubmitRegisterCallback={onSubmitRegisterCallback}
+          onShowPasswordCallback={onShowPasswordCallback}
+          errors={errors}
+        />
+      ) : (
+        <Login
+          email={email}
+          password={password}
+          showPassword={showPassword}
+          onChangeCallback={onChangeCallback}
+          onSubmitLoginCallback={onSubmitLoginCallback}
+          onShowPasswordCallback={onShowPasswordCallback}
+          errors={errors}
+        />
+      )}
+    </div>
+  );
+};
 
 AuthContainer.defaultProps = {
-  hasAccount: true,
+  hasAccount: false,
 };
 
 AuthContainer.propTypes = {
+  setAlert: PropTypes.func.isRequired,
   registerUser: PropTypes.func.isRequired,
   loginUser: PropTypes.func.isRequired,
   auth: PropTypes.shape({
-    isAuthenticated: PropTypes.bool.isRequired,
+    isAuthenticated: PropTypes.bool,
   }).isRequired,
+  errors: PropTypes.shape({}).isRequired,
   hasAccount: PropTypes.bool,
-  history: PropTypes.object.isRequired, // eslint-disable-line
-  errors: PropTypes.shape({
-    name: PropTypes.string,
-    email: PropTypes.string,
-    password: PropTypes.string,
-    passwordConfirm: PropTypes.string,
-  }).isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -161,4 +104,9 @@ const mapStateToProps = state => ({
   errors: state.errors,
 });
 
-export default connect(mapStateToProps, { registerUser, loginUser })(withRouter(AuthContainer));
+export default connect(
+  mapStateToProps,
+  { setAlert, registerUser, loginUser },
+)(withRouter(AuthContainer));
+
+// Does this container need withRouter??
