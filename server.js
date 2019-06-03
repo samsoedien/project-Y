@@ -12,7 +12,7 @@
 // server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 const express = require('express');
-const connectDB = require('./utils/db');
+const connectDB = require('./tools/db');
 
 const app = express();
 
