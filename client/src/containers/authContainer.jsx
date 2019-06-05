@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link, Redirect, withRouter } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setAlert } from '../actions/alertActions';
 import { registerUser, loginUser } from '../actions/authActions';
@@ -46,7 +46,11 @@ const AuthContainer = ({
 
   const onSubmitLoginCallback = async e => {
     e.preventDefault();
-    loginUser({ email, password });
+    const userData = {
+      email,
+      password,
+    };
+    loginUser(userData);
   };
 
   const onShowPasswordCallback = () => {

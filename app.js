@@ -13,9 +13,9 @@ const multer = require('multer');
 const passport = require('passport');
 const uuidv4 = require('uuid/v4');
 
-const usersRoutes = require('./routes/users');
-const profilesRoutes = require('./routes/profiles');
-const postsRoutes = require('./routes/posts');
+const userRoutes = require('./routes/users');
+const profileRoutes = require('./routes/profiles');
+const postRoutes = require('./routes/posts');
 
 const app = express();
 
@@ -69,6 +69,10 @@ app.set('views', 'views');
 app.use(multer({ storage: fileStorage, fileFilter }).single('image'));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
+// // Passport middleware
+// app.use(passport.initialize());
+// require('./tools/passport')(passport);
+
 // Handling CORS errors
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -87,9 +91,9 @@ app.use((req, res, next) => {
 });
 
 // Use Routes
-app.use('/api/users', usersRoutes);
-app.use('/api/profiles', profilesRoutes);
-app.use('/api/posts', postsRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/profiles', profileRoutes);
+app.use('/api/posts', postRoutes);
 
 app.use((error, req, res, next) => {
   console.log(error);
