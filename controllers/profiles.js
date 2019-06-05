@@ -1,19 +1,40 @@
-const { check, validationResult } = require('express-validator/check');
+const { validationResult } = require('express-validator/check');
 
 const User = require('../models/User');
 const Profile = require('../models/Profile');
 const Post = require('../models/Post');
 
-exports.getProfile = async (req, res, next) => {
+exports.testProfiles = (req, res, next) =>
+  res.send('Profile routes are active');
+
+exports.getProfiles = async (req, res, next) => {
   try {
-    const profile = await Profile.findOne({ user: req.user.id }).populate(
-      'user',
-      ['name', 'avatar'],
-    );
-    if (!profile) {
-      return res.status(400).json({ msg: 'There is no profile for this user' });
+    const profiles = await Profile.find()
+      .populate('user', ['name', 'avatar'])
+      .select('-__v')
+      .sort({ date: -1 })
+      .exec();
+    if (!profiles) {
+      errors.noprofile = 'There are no profiles';
+      return res.status(404).json(errors);
     }
-    res.json(profile);
+    return res.status(200).json(profiles);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+};
+
+exports.getCurrentProfile = async (req, res, next) => {
+  try {
+    const profile = await Profile.findOne({ user: req.user.id })
+      .populate('user', ['name', 'avatar'])
+      .select('-__v')
+      .exec();
+    if (!profile) {
+      return res.status(404).json({ msg: 'There is no profile for this user' });
+    }
+    return res.status(200).json(profile);
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
@@ -85,16 +106,6 @@ exports.postProfile = async (req, res, next) => {
 
   console.log(profileFields.skills);
   res.send('hello');
-};
-
-exports.getAllProfiles = async (req, res, next) => {
-  try {
-    const profiles = await Profile.find().populate('user', ['name', 'avatar']);
-    res.json(profiles);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server Error');
-  }
 };
 
 exports.getProfileById = async (req, res, next) => {

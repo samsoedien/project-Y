@@ -13,32 +13,14 @@ import {
 } from '../constants/types';
 import { setAlert } from './alertActions';
 
-export const loadUser = () => async dispatch => {
-  if (localStorage.token) {
-    setAuthToken(localStorage.token);
-  }
-  try {
-    const res = await axios.get('/api/users');
-    dispatch({
-      type: USER_LOADED,
-      payload: res.data,
-    });
-  } catch (err) {
-    dispatch({
-      type: AUTH_ERROR,
-    });
-  }
-};
-
-export const registerUser = ({ name, email, password }) => async dispatch => {
+export const registerUser = userData => async dispatch => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
     },
   };
-  const body = JSON.stringify({ name, email, password });
   try {
-    const res = await axios.put('/api/users/register', body, config);
+    const res = await axios.put('/api/users/register', userData, config);
     dispatch({
       type: REGISTER_SUCCESS,
       payload: res.data,
@@ -61,7 +43,6 @@ export const loginUser = userData => async dispatch => {
       'Content-Type': 'application/json',
     },
   };
-  // const body = JSON.stringify({ email, password });
   try {
     const res = await axios.post('/api/users/login', userData, config);
     dispatch({
@@ -76,6 +57,23 @@ export const loginUser = userData => async dispatch => {
     }
     dispatch({
       type: LOGIN_FAIL,
+    });
+  }
+};
+
+export const loadUser = () => async dispatch => {
+  if (localStorage.token) {
+    setAuthToken(localStorage.token);
+  }
+  try {
+    const res = await axios.get('/api/users/current');
+    dispatch({
+      type: USER_LOADED,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: AUTH_ERROR,
     });
   }
 };

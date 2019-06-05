@@ -40,7 +40,12 @@ const AuthContainer = ({
     if (password !== passwordConfirm) {
       setAlert('Passwords do not match', 'danger');
     } else {
-      registerUser({ name, email, password });
+      const userData = {
+        name,
+        email,
+        password,
+      }
+      registerUser(userData);
     }
   };
 

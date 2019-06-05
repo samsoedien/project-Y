@@ -3,17 +3,17 @@ const express = require('express');
 const authMiddleware = require('../middleware/auth');
 const profileValidation = require('../validation/profile');
 const experienceValidation = require('../validation/experience');
-const profileController = require('../controllers/profile');
+const profileController = require('../controllers/profiles');
 
 const router = express.Router();
 
-router.get('/test', (req, res, next) => res.send('Profile route'));
+router.get('/test', profileController.testProfiles);
 
-router.get('/', authMiddleware, profileController.getProfile);
+router.get('/', authMiddleware, profileController.getProfiles);
+
+router.get('/current', profileController.getCurrentProfile);
 
 router.post('/', [authMiddleware, profileValidation], profileController.postProfile);
-
-router.get('/all', profileController.getAllProfiles);
 
 router.get('/user/:user_id', profileController.getProfileById);
 

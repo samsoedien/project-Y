@@ -6,7 +6,9 @@ const config = require('config');
 
 const User = require('../models/User');
 
-exports.getUser = async (req, res, next) => {
+exports.testUsers = (req, res, next) => res.send('User routes are active');
+
+exports.getCurrentUser = async (req, res, next) => {
   try {
     const user = await User.findById(req.user.id).select('-password');
     return res.status(200).json(user);

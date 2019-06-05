@@ -7,6 +7,8 @@ const postValidation = require('../validation/posts');
 const commentValidation = require('../validation/comments');
 const postController = require('../controllers/posts');
 
+router.get('/test', postController.testPosts);
+
 router.get('/', (req, res, next) => res.send('Posts route'));
 
 router.get('/', postController.getPosts);

@@ -3,6 +3,8 @@ const { check, validationResult } = require('express-validator/check');
 const Post = require('../models/Post');
 const User = require('../models/User');
 
+exports.testPosts = (req, res, next) => res.send('Post routes are active')
+
 exports.getPosts = async (req, res, next) => {
   try {
     const posts = await Post.find().sort({ date: -1 });

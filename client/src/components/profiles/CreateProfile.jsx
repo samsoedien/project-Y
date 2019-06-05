@@ -1,28 +1,24 @@
-import React, { useState, Fragment } from 'react';
-import PropTypes from 'prop-types';
-import { Link, withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { createProfile } from '../../actions/profileActions';
+import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 
-const CreateProfile = ({ createProfile, history }) => {
-  const [formData, setFormData] = useState({
-    company: '',
-    twitter: '',
-  });
-  const [displaySocialInputs, toggleSocialInputs] = useState(false);
-
-  const { company, twitter } = formData;
-
-  const onChange = e =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+const CreateProfile = ({
+  company,
+  onChangeCallback,
+  onSubmitCallback,
+  createProfile,
+  history,
+  errors,
+}) => {
+  const onChange = e => {
+    onChangeCallback(e);
+  };
 
   const onSubmit = e => {
-    e.preventDefault();
-    createProfile(formData, history);
+    onSubmitCallback(e);
   };
 
   return (
-    <form onSubmit={e => onSubmit(e)}>
+    <form onSubmit={e => onSubmit(e)} className="">
       <h1>Create Profile</h1>
       <input
         type="text"
@@ -54,11 +50,12 @@ const CreateProfile = ({ createProfile, history }) => {
 };
 
 CreateProfile.propTypes = {
+  company: PropTypes.string.isRequired,
+  onChangeCallback: PropTypes.func.isRequired,
+  onSubmitCallback: PropTypes.func.isRequired,
   createProfile: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
+  errors: PropTypes.shape({}).isRequired,
 };
 
-export default connect(
-  null,
-  { createProfile },
-)(withRouter(CreateProfile));
+export default CreateProfile;

@@ -16,7 +16,7 @@ import {
 
 export const getCurrentProfile = () => async dispatch => {
   try {
-    const res = await axios.get('/api/profiles');
+    const res = await axios.get('/api/profiles/current');
     dispatch({
       type: GET_PROFILE,
       payload: res.data,
@@ -32,7 +32,7 @@ export const getCurrentProfile = () => async dispatch => {
 export const getProfiles = () => async dispatch => {
   dispatch({ type: CLEAR_PROFILE });
   try {
-    const res = await axios.get('api/profiles/all');
+    const res = await axios.get('api/profiles');
     dispatch({
       type: GET_PROFILES,
       payload: res.data,
@@ -46,7 +46,7 @@ export const getProfiles = () => async dispatch => {
 };
 
 export const createProfile = (
-  formData,
+  profileData,
   history,
   edit = false,
 ) => async dispatch => {
@@ -56,7 +56,7 @@ export const createProfile = (
         'Content-Type': 'application/json',
       },
     };
-    const res = await axios.post('/api/profiles', formData, config);
+    const res = await axios.post('/api/profiles', profileData, config);
     dispatch({
       type: GET_PROFILE,
       payload: res.data,
