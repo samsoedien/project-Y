@@ -1,8 +1,13 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import './ProfileForm.css';
 
-const CreateProfile = ({
+const ProfileForm = ({
   company,
+  twitter,
+  displaySocialInputs,
+  toggleSocialInputs,
   onChangeCallback,
   onSubmitCallback,
   createProfile,
@@ -18,7 +23,7 @@ const CreateProfile = ({
   };
 
   return (
-    <form onSubmit={e => onSubmit(e)} className="">
+    <form onSubmit={e => onSubmit(e)} className="profile-form">
       <h1>Create Profile</h1>
       <input
         type="text"
@@ -49,13 +54,13 @@ const CreateProfile = ({
   );
 };
 
-CreateProfile.propTypes = {
+ProfileForm.propTypes = {
   company: PropTypes.string.isRequired,
   onChangeCallback: PropTypes.func.isRequired,
   onSubmitCallback: PropTypes.func.isRequired,
-  createProfile: PropTypes.func.isRequired,
+  ProfileForm: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
   errors: PropTypes.shape({}).isRequired,
 };
 
-export default CreateProfile;
+export default ProfileForm;

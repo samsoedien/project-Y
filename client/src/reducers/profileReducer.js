@@ -1,8 +1,9 @@
 import {
   GET_PROFILE,
+  GET_PROFILES,
   PROFILE_ERROR,
   CLEAR_PROFILE,
-  GET_PROFILES,
+  UPDATE_PROFILE,
   PROFILE_LOADING,
   CLEAR_CURRENT_PROFILE,
 } from '../constants/types';
@@ -11,7 +12,7 @@ const initialState = {
   profile: null,
   profiles: [], // was null
   repos: [], // not implemented
-  loading: false,
+  loading: true,
   error: {},
 };
 
@@ -19,9 +20,16 @@ export default function(state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
     case GET_PROFILE:
+    case UPDATE_PROFILE:
       return {
         ...state,
         profile: payload,
+        loading: false,
+      };
+    case GET_PROFILES:
+      return {
+        ...state,
+        profiles: payload,
         loading: false,
       };
     case PROFILE_ERROR:

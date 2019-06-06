@@ -1,32 +1,24 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { getCurrentProfile } from '../../actions/profileActions';
+import './Dashboard.css';
 
 import Spinner from '../layout/Spinner';
 import DashboardActions from './DashboardActions';
 import Experience from './Experience';
 
-const Dashboard = ({
-  getCurrentProfile,
-  auth: { user },
-  profile: { profile, loading },
-}) => {
-  useEffect(() => {
-    getCurrentProfile();
-  }, []);
+const Dashboard = ({ profile, loading, user, deleteAccountCallback }) => {
+  const deleteAccount = e => deleteAccountCallback(e);
 
   return loading && profile === null ? (
     <Spinner />
   ) : (
-    <Fragment>
+    <div className="dashboard">
       <h1>Dashboard</h1>
       <p>Welcome {user && user.name}</p>
       {profile !== null ? (
         <Fragment>
           <DashboardActions />
-          <Experience experience={profile.experiences} />
         </Fragment>
       ) : (
         <Fragment>
@@ -34,27 +26,15 @@ const Dashboard = ({
           <Link to="/create-profile">Create Profile</Link>
         </Fragment>
       )}
-    </Fragment>
+    </div>
   );
 };
 
 Dashboard.propTypes = {
-  getCurrentProfile: PropTypes.func.isRequired,
-  auth: PropTypes.shape({
-    user: PropTypes.object,
-  }).isRequired,
-  profile: PropTypes.shape({
-    profile: PropTypes.object,
-    loading: PropTypes.bool,
-  }).isRequired,
+  deleteAccountCallback: PropTypes.func.isRequired,
+  user: PropTypes.object,
+  profile: PropTypes.object,
+  loading: PropTypes.bool,
 };
 
-const mapStateToProps = state => ({
-  auth: state.auth,
-  profile: state.profile,
-});
-
-export default connect(
-  mapStateToProps,
-  { getCurrentProfile },
-)(Dashboard);
+export default Dashboard;

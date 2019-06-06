@@ -27,10 +27,12 @@ exports.getProfiles = async (req, res, next) => {
 
 exports.getCurrentProfile = async (req, res, next) => {
   try {
-    const profile = await Profile.findOne({ user: req.user.id })
-      .populate('user', ['name', 'avatar'])
-      .select('-__v')
-      .exec();
+    const profile = await Profile.findOne({ user: req.user.id }).populate(
+      'user',
+      ['name', 'avatar'],
+    );
+    // .select('-__v');
+    // .exec();
     if (!profile) {
       return res.status(404).json({ msg: 'There is no profile for this user' });
     }
@@ -44,7 +46,7 @@ exports.getCurrentProfile = async (req, res, next) => {
 exports.postProfile = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
+    return res.status(422).json({ errors: errors.array() });
   }
   const {
     company,
@@ -92,20 +94,17 @@ exports.postProfile = async (req, res, next) => {
         { $set: profileFields },
         { new: true },
       );
-      return res.json(profile);
+      return res.status(201).json(profile);
     }
 
     // Create
     profile = new Profile(profileFields);
     await profile.save();
-    res.json(profile);
+    return res.status(201).json(profile);
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
   }
-
-  console.log(profileFields.skills);
-  res.send('hello');
 };
 
 exports.getProfileById = async (req, res, next) => {

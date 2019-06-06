@@ -9,7 +9,6 @@ import {
   ACCOUNT_DELETED,
   USER_LOADED,
   AUTH_ERROR,
-  SET_CURRENT_USER,
 } from '../constants/types';
 
 const initialState = {
@@ -51,12 +50,6 @@ export default function(state = initialState, action) {
         token: null,
         isAuthenticated: false,
         loading: false,
-      };
-    case SET_CURRENT_USER:
-      return {
-        ...state,
-        isAuthenticated: !isEmpty(payload),
-        user: payload,
       };
     default:
       return state;

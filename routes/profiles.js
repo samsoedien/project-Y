@@ -11,16 +11,28 @@ router.get('/test', profileController.testProfiles);
 
 router.get('/', authMiddleware, profileController.getProfiles);
 
-router.get('/current', profileController.getCurrentProfile);
+router.get('/current', authMiddleware, profileController.getCurrentProfile);
 
-router.post('/', [authMiddleware, profileValidation], profileController.postProfile);
+router.post(
+  '/',
+  [authMiddleware, profileValidation],
+  profileController.postProfile,
+);
 
-router.get('/user/:user_id', profileController.getProfileById);
+router.get('/:user_id', profileController.getProfileById);
 
 router.delete('/', profileController.deleteProfile);
 
-router.put('/experience', [authMiddleware, experienceValidation], profileController.putProfileExperience);
+router.put(
+  '/experience',
+  [authMiddleware, experienceValidation],
+  profileController.putProfileExperience,
+);
 
-router.delete('/experience/exp_id', [authMiddleware], profileController.DeleteProfileExperience);
+router.delete(
+  '/experience/exp_id',
+  [authMiddleware],
+  profileController.DeleteProfileExperience,
+);
 
 module.exports = router;

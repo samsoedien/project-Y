@@ -1,14 +1,15 @@
 import React, { Fragment } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import PrivateRouteWrapper from './helpers/PrivateRouteWrapper';
 import PrivateRoute from './components/routing/PrivateRoute';
 
 // import LandingContainer from './containers/LandingContainer';
 import AuthContainer from './containers/AuthContainer';
 import Landing from './components/layout/Landing';
 import Dashboard from './components/dashboard/Dashboard';
-import CreateProfile from './components/profiles/CreateProfile';
-import Profiles from './components/profiles/Profiles';
+import ProfileFormContainer from './containers/ProfileFormContainer';
+import ProfileUpdateContainer from './containers/ProfileUpdateContainer';
+import ProfileListContainer from './containers/ProfileListContainer';
+import ProfileContainer from './containers/ProfileContainer';
 
 const Routes = () => (
   <Fragment>
@@ -24,9 +25,19 @@ const Routes = () => (
         path="/login"
         render={() => <AuthContainer hasAccount={true} />}
       />
-      <Route exact path="/profiles" component={Profiles} />
+      <Route exact path="/profiles" component={ProfileListContainer} />
+      <Route exact path="/profiles/:id" component={ProfileContainer} />
       <PrivateRoute exact path="/dashboard" component={Dashboard} />
-      <PrivateRoute exact path="/create-profile" component={CreateProfile} />
+      <PrivateRoute
+        exact
+        path="/create-profile"
+        component={ProfileFormContainer}
+      />
+      <PrivateRoute
+        exact
+        path="/edit-profile"
+        component={ProfileUpdateContainer}
+      />
     </Switch>
   </Fragment>
 );
