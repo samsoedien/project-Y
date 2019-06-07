@@ -3,12 +3,12 @@ const { check, validationResult } = require('express-validator/check');
 const Post = require('../models/Post');
 const User = require('../models/User');
 
-exports.testPosts = (req, res, next) => res.send('Post routes are active')
+exports.testPosts = (req, res, next) => res.send('Post routes are active');
 
 exports.getPosts = async (req, res, next) => {
   try {
     const posts = await Post.find().sort({ date: -1 });
-    res.json(posts);
+    return res.status(200).json(posts);
   } catch (err) {
     console.error(err);
     return res.status(500).send('Server Error');
@@ -82,7 +82,9 @@ exports.putAddLike = async (req, res, next) => {
   try {
     const post = await Post.findById(req.params.id);
 
-    if (post.likes.filter(like => like.user.toString() === req.user.id).length > 0) {
+    if (
+      post.likes.filter(like => like.user.toString() === req.user.id).length > 0
+    ) {
       return res.status(400).json({ msg: 'Post already liked' });
     }
     post.likes.unshift({ user: req.user.id });
@@ -99,7 +101,9 @@ exports.putRemoveLike = async (req, res, next) => {
   try {
     const post = await Post.findById(req.params.id);
 
-    if (post.likes.filter(like => like.user.toString() === req.user.id).length > 0) {
+    if (
+      post.likes.filter(like => like.user.toString() === req.user.id).length > 0
+    ) {
       return res.status(400).json({ msg: 'Post has not yet been liked' });
     }
     // Get remove index
@@ -147,7 +151,9 @@ exports.postComment = async (req, res, next) => {
 exports.deleteComment = async (req, res, next) => {
   try {
     const post = await Post.findById(req.params.id);
-    const comment = post.comment.find(comment => comment.id === req.params.comment_id);
+    const comment = post.comment.find(
+      comment => comment.id === req.params.comment_id,
+    );
 
     if (!comment) {
       return res.status(404).json({ msg: 'Comment does not exists' });

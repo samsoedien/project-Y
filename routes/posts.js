@@ -9,7 +9,7 @@ const postController = require('../controllers/posts');
 
 router.get('/test', postController.testPosts);
 
-router.get('/', (req, res, next) => res.send('Posts route'));
+router.get('/', authMiddleware, (req, res, next) => res.send('Posts route'));
 
 router.get('/', postController.getPosts);
 

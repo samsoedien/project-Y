@@ -4,15 +4,19 @@ import { connect } from 'react-redux';
 import { getPosts } from '../actions/postActions';
 
 import PostFeed from '../components/posts/PostFeed';
+import PostFormContainer from './PostFormContainer';
 
-const PostContainer = ({ posts: { posts, loading }, getPosts }) => {
+const PostContainer = ({ posts, getPosts }) => {
   useEffect(() => {
     getPosts();
+    console.log(posts);
   }, [getPosts]);
 
   return (
     <div className="post-container">
-      <PostFeed posts={posts} loading={loading} />
+      <h1>hi</h1>
+      {/* <PostFeed posts={posts} loading={loading} /> */}
+      <PostFormContainer />
     </div>
   );
 };
