@@ -1,11 +1,11 @@
 import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getCurrentProfile, deleteAccount } from '../../actions/profileActions';
+import { getCurrentProfile, deleteAccount } from '../actions/profileActions';
 
 import Dashboard from '../components/dashboard/Dashboard';
 
-const Dashboard = ({
+const DashboardContainer = ({
   profile: { profile, loading },
   auth: { user },
   getCurrentProfile,
@@ -15,7 +15,7 @@ const Dashboard = ({
     getCurrentProfile();
   }, [getCurrentProfile]);
 
-  const deleteAccountCallback = e => deleteAccount(e);
+  const deleteAccountCallback = () => deleteAccount();
 
   return (
     <div className="dashboard-container">
@@ -29,7 +29,7 @@ const Dashboard = ({
   );
 };
 
-Dashboard.propTypes = {
+DashboardContainer.propTypes = {
   getCurrentProfile: PropTypes.func.isRequired,
   deleteAccount: PropTypes.func.isRequired,
   auth: PropTypes.shape({
@@ -49,4 +49,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { getCurrentProfile, deleteAccount },
-)(Dashboard);
+)(DashboardContainer);

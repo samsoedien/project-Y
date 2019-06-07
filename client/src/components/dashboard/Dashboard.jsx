@@ -5,10 +5,9 @@ import './Dashboard.css';
 
 import Spinner from '../layout/Spinner';
 import DashboardActions from './DashboardActions';
-import Experience from './Experience';
 
 const Dashboard = ({ profile, loading, user, deleteAccountCallback }) => {
-  const deleteAccount = e => deleteAccountCallback(e);
+  const deleteAccount = () => deleteAccountCallback();
 
   return loading && profile === null ? (
     <Spinner />
@@ -19,6 +18,7 @@ const Dashboard = ({ profile, loading, user, deleteAccountCallback }) => {
       {profile !== null ? (
         <Fragment>
           <DashboardActions />
+          <button onClick={() => deleteAccount()}>Delete Account</button>
         </Fragment>
       ) : (
         <Fragment>

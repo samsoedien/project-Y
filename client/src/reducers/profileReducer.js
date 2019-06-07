@@ -4,8 +4,6 @@ import {
   PROFILE_ERROR,
   CLEAR_PROFILE,
   UPDATE_PROFILE,
-  PROFILE_LOADING,
-  CLEAR_CURRENT_PROFILE,
 } from '../constants/types';
 
 const initialState = {

@@ -5,13 +5,9 @@ import {
   GET_PROFILE,
   PROFILE_ERROR,
   GET_PROFILES,
-  PROFILE_LOADING,
   CLEAR_PROFILE,
   UPDATE_PROFILE,
   ACCOUNT_DELETED,
-  CLEAR_CURRENT_PROFILE,
-  GET_ERRORS,
-  SET_CURRENT_USER,
 } from '../constants/types';
 
 export const getCurrentProfile = () => async dispatch => {
@@ -113,7 +109,7 @@ export const deleteExperience = id => async dispatch => {
 export const deleteAccount = () => async dispatch => {
   if (window.confirm('are you sure?')) {
     try {
-      const res = await axios.delete('/api/profiles');
+      await axios.delete('/api/profiles');
 
       dispatch({ type: CLEAR_PROFILE });
       dispatch({ type: ACCOUNT_DELETED });

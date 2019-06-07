@@ -21,7 +21,7 @@ router.post(
 
 router.get('/:user_id', profileController.getProfileById);
 
-router.delete('/', profileController.deleteProfile);
+router.delete('/', authMiddleware, profileController.deleteProfile);
 
 router.put(
   '/experience',

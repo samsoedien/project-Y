@@ -5,11 +5,13 @@ import PrivateRoute from './components/routing/PrivateRoute';
 // import LandingContainer from './containers/LandingContainer';
 import AuthContainer from './containers/AuthContainer';
 import Landing from './components/layout/Landing';
-import Dashboard from './components/dashboard/Dashboard';
+import DashboardContainer from './containers/DashboardContainer';
 import ProfileFormContainer from './containers/ProfileFormContainer';
 import ProfileUpdateContainer from './containers/ProfileUpdateContainer';
 import ProfileListContainer from './containers/ProfileListContainer';
 import ProfileContainer from './containers/ProfileContainer';
+
+import PostContainer from './containers/PostContainer';
 
 const Routes = () => (
   <Fragment>
@@ -27,7 +29,7 @@ const Routes = () => (
       />
       <Route exact path="/profiles" component={ProfileListContainer} />
       <Route exact path="/profiles/:id" component={ProfileContainer} />
-      <PrivateRoute exact path="/dashboard" component={Dashboard} />
+      <PrivateRoute exact path="/dashboard" component={DashboardContainer} />
       <PrivateRoute
         exact
         path="/create-profile"
@@ -38,6 +40,7 @@ const Routes = () => (
         path="/edit-profile"
         component={ProfileUpdateContainer}
       />
+      <PrivateRoute exact path="/posts" component={PostContainer} />
     </Switch>
   </Fragment>
 );

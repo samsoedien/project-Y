@@ -9,7 +9,7 @@ export const CLEAR_CURRENT_PROFILE = 'CLEAR_CURRENT_PROFILE';
 export const PROFILE_NOT_FOUND = 'PROFILE_NOT_FOUND';
 
 export const POST_LOADING = 'POST_LOADING';
-export const GET_POSTS = 'GET_POSTS';
+// export const GET_POSTS = 'GET_POSTS';
 export const GET_POST = 'GET_POST';
 export const ADD_POST = 'ADD_POST';
 export const DELETE_POST = 'DELETE_POST';
@@ -29,3 +29,5 @@ export const PROFILE_ERROR = 'PROFILE_ERROR';
 export const CLEAR_PROFILE = 'CLEAR_PROFILE';
 export const UPDATE_PROFILE = 'UPDATE_PROFILE';
 export const ACCOUNT_DELETED = 'ACCOUNT_DELETED';
+export const GET_POSTS = 'GET_POSTS';
+export const POST_ERROR = 'POST_ERROR';
