@@ -17,9 +17,9 @@ router.get('/:id', postController.getPostById);
 
 router.delete('/:id', authMiddleware, postController.deletePost);
 
-router.put('/like/:id', authMiddleware, postController.putAddLike);
+router.put('/like/:postId', authMiddleware, postController.putAddLike);
 
-router.put('/unlike/:id', authMiddleware, postController.putRemoveLike);
+router.put('/unlike/:postId', authMiddleware, postController.putRemoveLike);
 
 router.post(
   '/comment/:id',

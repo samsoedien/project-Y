@@ -1,19 +1,54 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getPosts } from '../actions/postActions';
+import {
+  getPosts,
+  deletePost,
+  addLike,
+  removeLike,
+} from '../actions/postActions';
 
 import PostFeed from '../components/posts/PostFeed';
 import PostFormContainer from './PostFormContainer';
 
-const PostContainer = ({ post: { posts, loading }, getPosts }) => {
+const PostContainer = ({
+  post: { posts, loading },
+  auth,
+  getPosts,
+  deletePost,
+  addLike,
+  removeLike,
+}) => {
+  const [state] = useState({
+    showActions: true,
+  });
+
+  const { showActions } = state;
+
   useEffect(() => {
     getPosts();
   }, [getPosts]);
 
+  const onLikeCallback = id => {
+    addLike(id);
+  };
+
+  const onUnlikeCallback = e => {};
+
+  const onDeleteCallback = id => {
+    deletePost(id);
+  };
+
   return (
     <div className="post-container">
-      <PostFeed posts={posts} loading={loading} />
+      <PostFeed
+        posts={posts}
+        loading={loading}
+        auth={auth}
+        showActions={showActions}
+        onLikeCallback={onLikeCallback}
+        onDeleteCallback={onDeleteCallback}
+      />
       <PostFormContainer />
     </div>
   );
@@ -21,14 +56,18 @@ const PostContainer = ({ post: { posts, loading }, getPosts }) => {
 
 PostContainer.propTypes = {
   getPosts: PropTypes.func.isRequired,
+  deletePost: PropTypes.func.isRequired,
+  addLike: PropTypes.func.isRequired,
+  removeLike: PropTypes.func.isRequired,
   post: PropTypes.shape({}).isRequired,
 };
 
 const mapStateToProps = state => ({
   post: state.post,
+  auth: state.auth,
 });
 
 export default connect(
   mapStateToProps,
-  { getPosts },
+  { getPosts, deletePost, addLike, removeLike },
 )(PostContainer);

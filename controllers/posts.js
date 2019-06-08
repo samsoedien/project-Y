@@ -82,17 +82,18 @@ exports.deletePost = async (req, res, next) => {
 
 exports.putAddLike = async (req, res, next) => {
   try {
-    const post = await Post.findById(req.params.id);
+    const post = await Post.findById(req.params.postId);
 
     if (
       post.likes.filter(like => like.user.toString() === req.user.id).length > 0
     ) {
+      console.error({ error: 'post already liked' });
       return res.status(400).json({ msg: 'Post already liked' });
     }
     post.likes.unshift({ user: req.user.id });
     await post.save();
 
-    res.json(post.likes);
+    res.status(201).json(post.likes);
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
@@ -101,7 +102,7 @@ exports.putAddLike = async (req, res, next) => {
 
 exports.putRemoveLike = async (req, res, next) => {
   try {
-    const post = await Post.findById(req.params.id);
+    const post = await Post.findById(req.params.postId);
 
     if (
       post.likes.filter(like => like.user.toString() === req.user.id).length > 0
