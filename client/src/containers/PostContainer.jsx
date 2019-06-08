@@ -33,8 +33,6 @@ const PostContainer = ({
     addLike(id);
   };
 
-  const onUnlikeCallback = e => {};
-
   const onDeleteCallback = id => {
     deletePost(id);
   };

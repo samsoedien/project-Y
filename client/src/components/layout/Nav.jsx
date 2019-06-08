@@ -40,6 +40,7 @@ const Nav = ({ auth: { isAuthenticated, loading }, logoutUser }) => {
       <ul>
         <li>
           <Link to="/profiles">Profiles</Link>
+          <Link to="/blogs">Blogs</Link>
           <Link to="/posts">Posts</Link>
         </li>
       </ul>

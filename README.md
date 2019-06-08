@@ -12,6 +12,7 @@ TODO: (backend)
 - Look into express validator differences between check and body methods
 - Decide on seperating responses for validation specific errors
 - Flash validation form errors to frontend
+- Send email for confirming registration
 
 TODO: (frontend)
 
@@ -25,6 +26,15 @@ TODO: (frontend)
 - Seperate presentational components and container components
 - Rewrite class based components to functional using React hooks
 - Rewrite CreateProfile component to have logic for both create and edit functionality using ternary operator
+- Check for consistency in ProfileList, PostFeed and BlogList components
+- When logging in on a specific page, redirect where the user was originally
+
+- Design Language System (DLS):
+  - Setup a Style Guide in Readme
+  - Create a Pattern Library with code examples, guidelines and use cases
+  - Find a structure / workflow that allows for modularity
+  - Emphasize on scalability
+  - Use theming for spacing, palletes and typography
 
 FIXME:
 
@@ -35,4 +45,4 @@ MISC:
 
 - Divide Front end & back end into seperate repositories?
 - Revise linting rules
-- Structure collections in Mongo Atlas
+- Structure data collections in Mongo Atlas

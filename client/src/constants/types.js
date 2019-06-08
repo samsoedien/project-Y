@@ -32,3 +32,6 @@ export const ACCOUNT_DELETED = 'ACCOUNT_DELETED';
 export const GET_POSTS = 'GET_POSTS';
 export const POST_ERROR = 'POST_ERROR';
 export const UPDATE_LIKES = 'UPDATE_LIKES';
+export const GET_BLOGS = 'GET_BLOGS';
+export const GET_BLOG = 'GET_BLOG';
+export const BLOG_ERROR = 'BLOG_ERROR';

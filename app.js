@@ -16,6 +16,7 @@ const uuidv4 = require('uuid/v4');
 const userRoutes = require('./routes/users');
 const profileRoutes = require('./routes/profiles');
 const postRoutes = require('./routes/posts');
+const blogRoutes = require('./routes/blogs');
 
 const app = express();
 
@@ -94,6 +95,7 @@ app.use((req, res, next) => {
 app.use('/api/users', userRoutes);
 app.use('/api/profiles', profileRoutes);
 app.use('/api/posts', postRoutes);
+app.use('/api/blogs', blogRoutes);
 
 app.use((error, req, res, next) => {
   console.log(error);

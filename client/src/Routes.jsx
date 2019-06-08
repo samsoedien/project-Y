@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import PrivateRoute from './components/routing/PrivateRoute';
+import PrivateRoute from './components/wrappers/PrivateRoute';
 
 // import LandingContainer from './containers/LandingContainer';
 import AuthContainer from './containers/AuthContainer';
@@ -12,6 +12,8 @@ import ProfileListContainer from './containers/ProfileListContainer';
 import ProfileContainer from './containers/ProfileContainer';
 
 import PostContainer from './containers/PostContainer';
+import BlogListContainer from './containers/BlogListContainer';
+import BlogFormContainer from './containers/BlogFormContainer';
 
 const Routes = () => (
   <Fragment>
@@ -41,6 +43,8 @@ const Routes = () => (
         component={ProfileUpdateContainer}
       />
       <PrivateRoute exact path="/posts" component={PostContainer} />
+      <Route exact path="/blogs" component={BlogListContainer} />
+      <PrivateRoute exact path="/create-blog" component={BlogFormContainer} />
     </Switch>
   </Fragment>
 );
