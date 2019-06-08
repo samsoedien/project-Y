@@ -7,8 +7,8 @@ import {
 } from '../constants/types';
 
 const initialState = {
-  profile: null,
   profiles: [], // was null
+  profile: null,
   repos: [], // not implemented
   loading: true,
   error: {},
@@ -47,25 +47,3 @@ export default function(state = initialState, action) {
       return state;
   }
 }
-// case PROFILE_LOADING:
-//   return {
-//     ...state,
-//     loading: true,
-//   };
-// case GET_PROFILE:
-//   return {
-//     ...state,
-//     profile: payload,
-//     loading: false,
-//   };
-// case GET_PROFILES:
-//   return {
-//     ...state,
-//     profiles: payload,
-//     loading: false,
-//   };
-// case CLEAR_CURRENT_PROFILE:
-//   return {
-//     ...state,
-//     profile: null,
-//   };

@@ -8,7 +8,7 @@ import PostForm from '../components/posts/PostForm';
 const PostFormContainer = ({ addPost }) => {
   const [text, setText] = useState('');
 
-  const onChangeCallback = e => {};
+  const onChangeCallback = e => setText(e.target.value);
 
   const onSubmitCallback = e => {
     e.preventDefault();
@@ -18,6 +18,7 @@ const PostFormContainer = ({ addPost }) => {
     };
 
     addPost(postData);
+    setText('');
   };
 
   return (

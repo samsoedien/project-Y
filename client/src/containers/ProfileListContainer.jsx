@@ -11,7 +11,7 @@ const ProfileListContainer = ({
 }) => {
   useEffect(() => {
     getProfiles();
-  }, []);
+  }, [getProfiles]);
 
   return (
     <div className="profile-container">

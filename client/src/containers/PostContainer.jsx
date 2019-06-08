@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getPosts } from '../actions/postActions';
@@ -6,16 +6,14 @@ import { getPosts } from '../actions/postActions';
 import PostFeed from '../components/posts/PostFeed';
 import PostFormContainer from './PostFormContainer';
 
-const PostContainer = ({ posts, getPosts }) => {
+const PostContainer = ({ post: { posts, loading }, getPosts }) => {
   useEffect(() => {
     getPosts();
-    console.log(posts);
   }, [getPosts]);
 
   return (
     <div className="post-container">
-      <h1>hi</h1>
-      {/* <PostFeed posts={posts} loading={loading} /> */}
+      <PostFeed posts={posts} loading={loading} />
       <PostFormContainer />
     </div>
   );
@@ -23,12 +21,11 @@ const PostContainer = ({ posts, getPosts }) => {
 
 PostContainer.propTypes = {
   getPosts: PropTypes.func.isRequired,
-  posts: PropTypes.object.isRequired,
+  post: PropTypes.shape({}).isRequired,
 };
 
 const mapStateToProps = state => ({
-  posts: state.posts,
-  // auth: state.auth
+  post: state.post,
 });
 
 export default connect(

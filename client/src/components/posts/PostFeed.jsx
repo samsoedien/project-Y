@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import './PostFeed.css';
 
@@ -6,21 +6,24 @@ import Spinner from '../layout/Spinner';
 import PostItem from './PostItem';
 
 const PostFeed = ({ posts, loading }) => {
+  console.log(posts);
+
   return loading ? (
     <Spinner />
   ) : (
     <div className="post-feed">
       <h2>Posts</h2>
-      {/* {posts}
       {posts.map(post => (
-        <PostItem key={post._id} post={post.text} />
-      ))} */}
+        <PostItem key={post._id} post={post} />
+      ))}
     </div>
   );
 };
 
 PostFeed.propTypes = {
-  posts: PropTypes.object.isRequired,
+  posts: PropTypes.shape({
+    text: PropTypes.string,
+  }).isRequired,
   loading: PropTypes.bool.isRequired,
 };
 

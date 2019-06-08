@@ -13,7 +13,7 @@ const PostForm = ({ text, onChangeCallback, onSubmitCallback }) => {
   return (
     <div>
       <h1>post form</h1>
-      <form onSubmit={e => onSubmit}>
+      <form onSubmit={e => onSubmit(e)}>
         <textarea
           name="text"
           value={text}
@@ -21,7 +21,7 @@ const PostForm = ({ text, onChangeCallback, onSubmitCallback }) => {
           rows="5"
           placeholder="Create a post"
           required
-          onChange={e => onChange}
+          onChange={e => onChange(e)}
         />
         <input type="submit" value="Submit" />
       </form>

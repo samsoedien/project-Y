@@ -8,6 +8,8 @@ exports.testPosts = (req, res, next) => res.send('Post routes are active');
 exports.getPosts = async (req, res, next) => {
   try {
     const posts = await Post.find().sort({ date: -1 });
+    if (!posts) return res.status(404).json({ msg: 'There are no posts' });
+
     return res.status(200).json(posts);
   } catch (err) {
     console.error(err);
