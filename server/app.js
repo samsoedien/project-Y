@@ -4,6 +4,7 @@ const https = require('https');
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 const morgan = require('morgan');
 const helmet = require('helmet');
 const compression = require('compression');
@@ -48,23 +49,26 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
+const accessLogStream = fs.createWriteStream(
+  path.join(__dirname, 'logs', 'access.log'),
+  { flags: 'a' },
+);
+
 app.use(helmet());
 app.use(compression());
-app.use(morgan('dev'));
-// app.use(morgan('combined', { stream: accessLogStream }));
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(morgan('combined', { stream: accessLogStream }));
+} else {
+  app.use(morgan('dev'));
+}
 
 app.use(express.json({ extended: false }));
-
 // app.use(bodyParser.urlencoded({ extended: false }));
 // app.use(bodyParser.json());
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
-
-// const accessLogStream = fs.createWriteStream(
-//   path.join(__dirname, 'logs', 'access.log'),
-//   { flags: 'a' }
-// );
 
 // Multer Middleware
 app.use(multer({ storage: fileStorage, fileFilter }).single('image'));
