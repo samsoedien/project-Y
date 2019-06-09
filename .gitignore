@@ -62,4 +62,4 @@ typings/
 
 # custom rules
 package-lock.json
-/config
+server/config
