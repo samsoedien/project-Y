@@ -1,0 +1,63 @@
+{
+  "name": "project-y",
+  "version": "1.0.0",
+  "description": "MERN stack project with shopping app functionality",
+  "main": "server.js",
+  "scripts": {
+    "client-install": "npm install --prefix client",
+    "start": "set PORT=4000 && node server.js",
+    "server": "set PORT=4000 && nodemon server.js --ignore client",
+    "client": "npm start --prefix ../client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "format": "prettier --write",
+    "pre-commit": "npm run format && git add .",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samsoedien/project-Y.git"
+  },
+  "keywords": [
+    "shopping",
+    "app"
+  ],
+  "author": "N Samsoedien <contact@samsoedien.com> (https://samsoedien.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/samsoedien/project-Y/issues"
+  },
+  "homepage": "https://github.com/samsoedien/project-Y#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "compression": "^1.7.4",
+    "config": "^3.1.0",
+    "csurf": "^1.10.0",
+    "dotenv": "^8.0.0",
+    "ejs": "^2.6.1",
+    "express": "^4.17.0",
+    "express-validator": "^5.3.1",
+    "gravatar": "^1.8.0",
+    "helmet": "^3.18.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.2.4",
+    "mongoose": "^5.5.9",
+    "morgan": "^1.9.1",
+    "multer": "^1.4.1",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "request": "^2.88.0",
+    "uuid": "^3.3.2",
+    "validator": "^10.11.0"
+  },
+  "devDependencies": {
+    "concurrently": "^4.1.0",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.17.2",
+    "husky": "^2.3.0",
+    "nodemon": "^1.19.0",
+    "prettier": "^1.17.1"
+  }
+}
