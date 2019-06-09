@@ -4,7 +4,6 @@ MERN stack project with shopping app functionality
 
 TODO: (backend)
 
-- Merge user and auth routes
 - Implement dotenv
 - Add status codes for each response
 - End each controller exports with return
@@ -46,3 +45,4 @@ MISC:
 - Divide Front end & back end into seperate repositories?
 - Revise linting rules
 - Structure data collections in Mongo Atlas
+- Learn React Native and connect server to mobile apps
