@@ -2,6 +2,7 @@ const express = require('express');
 
 const authMiddleware = require('../middleware/auth');
 const profileValidation = require('../validation/profile');
+const deviceValidation = require('../validation/devices');
 const experienceValidation = require('../validation/experience');
 const profileController = require('../controllers/profiles');
 
@@ -22,6 +23,12 @@ router.post(
 router.get('/:user_id', profileController.getProfileById);
 
 router.delete('/', authMiddleware, profileController.deleteProfile);
+
+router.put(
+  '/devices',
+  [authMiddleware, deviceValidation],
+  profileController.addProfileDevice,
+);
 
 router.put(
   '/experience',

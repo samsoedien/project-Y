@@ -140,6 +140,30 @@ exports.deleteProfile = async (req, res, next) => {
   }
 };
 
+exports.addProfileDevice = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+  const { name } = req.body;
+
+  const newDevice = {
+    name,
+  };
+
+  try {
+    const profile = await Profile.findOne({ user: req.user.id });
+
+    profile.devices.unshift(newDevice);
+    await profile.save();
+
+    res.json(profile);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+};
+
 exports.putProfileExperience = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {

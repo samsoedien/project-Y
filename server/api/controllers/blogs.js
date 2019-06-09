@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const { validationResult } = require('express-validator/check');
 
 const Blog = require('../models/Blog');
@@ -35,7 +36,7 @@ exports.getBlogById = async (req, res, next) => {
 exports.postBlog = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
+    return res.status(422).json({ errors: errors.array() });
   }
   const { headline, article } = req.body;
 
@@ -44,12 +45,12 @@ exports.postBlog = async (req, res, next) => {
     if (blog) {
       return res.status(400).json({ msg: 'This headline already exists' });
     }
-    const newBlog = {
+    const newBlog = new Blog({
       _id: new mongoose.Types.ObjectId(),
       user: req.user.id,
       ...req.body,
-    };
-    await newBlog.save();
+    });
+    blog = await newBlog.save();
     return res.status(201).json(blog);
   } catch (err) {
     console.error(err);
