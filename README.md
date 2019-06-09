@@ -34,6 +34,7 @@ TODO: (frontend)
   - Find a structure / workflow that allows for modularity
   - Emphasize on scalability
   - Use theming for spacing, palletes and typography
+  - Link DLS to in Adobe XD built components
 
 FIXME:
 
@@ -44,5 +45,7 @@ MISC:
 
 - Divide Front end & back end into seperate repositories?
 - Revise linting rules
+- Revise naming conventions
+- Change License
 - Structure data collections in Mongo Atlas
 - Learn React Native and connect server to mobile apps
