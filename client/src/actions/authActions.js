@@ -2,14 +2,14 @@ import axios from 'axios';
 import setAuthToken from '../utils/setAuthToken';
 
 import {
-  AUTH_ERROR,
-  CLEAR_PROFILE,
   REGISTER_SUCCESS,
   REGISTER_FAIL,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
+  CLEAR_PROFILE,
   USER_LOADED,
+  AUTH_ERROR,
 } from '../constants/types';
 import { setAlert } from './alertActions';
 

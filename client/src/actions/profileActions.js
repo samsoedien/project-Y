@@ -2,12 +2,12 @@ import axios from 'axios';
 import { setAlert } from './alertActions';
 
 import {
-  GET_PROFILE,
-  PROFILE_ERROR,
   GET_PROFILES,
-  CLEAR_PROFILE,
+  GET_PROFILE,
   UPDATE_PROFILE,
+  CLEAR_PROFILE,
   ACCOUNT_DELETED,
+  PROFILE_ERROR,
 } from '../constants/types';
 
 export const getCurrentProfile = () => async dispatch => {
@@ -120,6 +120,32 @@ export const deleteAccount = () => async dispatch => {
         payload: { msg: err.response.statusText, status: err.response.status },
       });
     }
+  }
+};
+
+export const addDevice = (deviceData, history) => async dispatch => {
+  try {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    const res = await axios.put('/api/profiles/devices', deviceData, config);
+    dispatch({
+      type: UPDATE_PROFILE,
+      payload: res.data,
+    });
+    dispatch(setAlert('Device Added', 'success'));
+    history.push('/dashboard');
+  } catch (err) {
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+    }
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
   }
 };
 

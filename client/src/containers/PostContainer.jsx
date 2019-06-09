@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
@@ -38,7 +38,7 @@ const PostContainer = ({
   };
 
   return (
-    <div className="post-container">
+    <Fragment>
       <PostFeed
         posts={posts}
         loading={loading}
@@ -48,7 +48,7 @@ const PostContainer = ({
         onDeleteCallback={onDeleteCallback}
       />
       <PostFormContainer />
-    </div>
+    </Fragment>
   );
 };
 

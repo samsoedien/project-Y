@@ -18,14 +18,12 @@ const DashboardContainer = ({
   const deleteAccountCallback = () => deleteAccount();
 
   return (
-    <div className="dashboard-container">
-      <Dashboard
-        profile={profile}
-        loading={loading}
-        user={user}
-        deleteAccountCallback={deleteAccountCallback}
-      />
-    </div>
+    <Dashboard
+      profile={profile}
+      loading={loading}
+      user={user}
+      deleteAccountCallback={deleteAccountCallback}
+    />
   );
 };
 

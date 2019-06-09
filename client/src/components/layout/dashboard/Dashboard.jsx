@@ -5,6 +5,7 @@ import './Dashboard.css';
 
 import Loader from '../../contents/Loader';
 import DashboardActions from './DashboardActions';
+import Devices from './Devices';
 
 const Dashboard = ({ profile, loading, user, deleteAccountCallback }) => {
   const deleteAccount = () => deleteAccountCallback();
@@ -19,6 +20,7 @@ const Dashboard = ({ profile, loading, user, deleteAccountCallback }) => {
         <Fragment>
           <DashboardActions />
           <button onClick={() => deleteAccount()}>Delete Account</button>
+          <Devices device={profile.devices} />
         </Fragment>
       ) : (
         <Fragment>

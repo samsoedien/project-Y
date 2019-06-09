@@ -15,7 +15,6 @@ const BlogList = ({ blogs, loading }) => {
       ) : (
         <h4>No blogs found</h4>
       )}
-      }
     </div>
   );
 };

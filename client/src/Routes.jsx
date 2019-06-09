@@ -14,6 +14,7 @@ import ProfileContainer from './containers/ProfileContainer';
 import PostContainer from './containers/PostContainer';
 import BlogListContainer from './containers/BlogListContainer';
 import BlogFormContainer from './containers/BlogFormContainer';
+import DeviceFormContainer from './containers/DeviceFormContainer';
 
 const Routes = () => (
   <Fragment>
@@ -32,6 +33,7 @@ const Routes = () => (
       <Route exact path="/profiles" component={ProfileListContainer} />
       <Route exact path="/profiles/:id" component={ProfileContainer} />
       <PrivateRoute exact path="/dashboard" component={DashboardContainer} />
+      <PrivateRoute exact path="/add-device" component={DeviceFormContainer} />
       <PrivateRoute
         exact
         path="/create-profile"

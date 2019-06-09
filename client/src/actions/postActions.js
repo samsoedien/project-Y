@@ -2,10 +2,11 @@ import axios from 'axios';
 import { setAlert } from './alertActions';
 import {
   GET_POSTS,
-  POST_ERROR,
+  GET_POST,
   ADD_POST,
   DELETE_POST,
   UPDATE_LIKES,
+  POST_ERROR,
 } from '../constants/types';
 
 export const getPosts = () => async dispatch => {
