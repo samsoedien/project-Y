@@ -62,3 +62,5 @@ exports.updateBlog = async (req, res, next) => {};
 exports.deleteBlog = async (req, res, next) => {};
 
 exports.postFavoriteBlog = async (req, res, next) => {};
+
+exports.likeBlogComment = async (req, res, next) => {};
