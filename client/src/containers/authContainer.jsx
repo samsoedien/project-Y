@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import { setAlert } from '../actions/alertActions';
 import { registerUser, loginUser } from '../actions/authActions';
 
-import Register from '../components/auth/Register';
-import Login from '../components/auth/Login';
+import Register from '../components/layout/auth/Register';
+import Login from '../components/layout/auth/Login';
 
 const AuthContainer = ({
   setAlert,
@@ -44,7 +44,7 @@ const AuthContainer = ({
         name,
         email,
         password,
-      }
+      };
       registerUser(userData);
     }
   };

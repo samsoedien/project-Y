@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createBlog } from '../actions/blogActions';
 
-import BlogForm from '../components/blogs/BlogForm';
+import BlogForm from '../components/layout/blogs/BlogForm';
 
 const BlogFormContainer = ({ createBlog, history }) => {
   const [formData, setFormData] = useState({

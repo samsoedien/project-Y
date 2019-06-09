@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './Dashboard.css';
 
-import Spinner from '../layout/Spinner';
+import Loader from '../../contents/Loader';
 import DashboardActions from './DashboardActions';
 
 const Dashboard = ({ profile, loading, user, deleteAccountCallback }) => {
   const deleteAccount = () => deleteAccountCallback();
 
   return loading && profile === null ? (
-    <Spinner />
+    <Loader />
   ) : (
     <div className="dashboard">
       <h1>Dashboard</h1>

@@ -1,13 +1,13 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import Spinner from '../layout/Spinner';
+import Loader from '../../contents/Loader';
 
 const Profile = ({ profile, loading }) => {
   return (
     <div>
       {profile === null || loading ? (
-        <Spinner />
+        <Loader />
       ) : (
         <Fragment>profile info</Fragment>
       )}

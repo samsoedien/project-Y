@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createProfile } from '../actions/profileActions';
 
-import ProfileForm from '../components/profiles/ProfileForm';
+import ProfileForm from '../components/layout/profiles/ProfileForm';
 
 const ProfileFormContainer = ({ createProfile, history }) => {
   const [formData, setFormData] = useState({

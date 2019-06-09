@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getProfiles } from '../actions/profileActions';
 
-import ProfileList from '../components/profiles/ProfileList';
+import ProfileList from '../components/layout/profiles/ProfileList';
 
 const ProfileListContainer = ({
   getProfiles,

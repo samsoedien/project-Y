@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Spinner from '../layout/Spinner';
+import Loader from '../../contents/Loader';
 import BlogItem from './BlogItem';
 
 const BlogList = ({ blogs, loading }) => {
   return loading ? (
-    <Spinner />
+    <Loader />
   ) : (
     <div className="blog-list">
       <h2>Blogs</h2>

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './PostFeed.css';
 
-import Spinner from '../layout/Spinner';
+import Loader from '../../contents/Loader';
 import PostItem from './PostItem';
 
 const PostFeed = ({
@@ -22,7 +22,7 @@ const PostFeed = ({
   };
 
   return loading ? (
-    <Spinner />
+    <Loader />
   ) : (
     <div className="post-feed">
       <h2>Posts</h2>

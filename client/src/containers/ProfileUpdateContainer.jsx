@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createProfile, getCurrentProfile } from '../actions/profileActions';
 
-import ProfileForm from '../components/profiles/ProfileForm';
+import ProfileForm from '../components/layout/profiles/ProfileForm';
 
 const ProfileUpdateContainer = ({
   profile: { profile, loading },

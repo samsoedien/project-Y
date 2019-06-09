@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getCurrentProfile, deleteAccount } from '../actions/profileActions';
 
-import Dashboard from '../components/dashboard/Dashboard';
+import Dashboard from '../components/layout/dashboard/Dashboard';
 
 const DashboardContainer = ({
   profile: { profile, loading },

@@ -21,7 +21,7 @@ import {
 } from '@material-ui/icons';
 import './Login.css';
 
-import BG_IMG from '../../assets/img/mountains-2098408.jpg';
+import BG_IMG from '../../../assets/img/mountains-2098408.jpg';
 
 const Login = ({
   email,

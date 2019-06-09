@@ -8,7 +8,7 @@ import {
   removeLike,
 } from '../actions/postActions';
 
-import PostFeed from '../components/posts/PostFeed';
+import PostFeed from '../components/layout/posts/PostFeed';
 import PostFormContainer from './PostFormContainer';
 
 const PostContainer = ({

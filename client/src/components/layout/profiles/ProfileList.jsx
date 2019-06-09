@@ -2,14 +2,14 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import './ProfileList.css';
 
-import Spinner from '../layout/Spinner';
+import Loader from '../../contents/Loader';
 import ProfileItem from './ProfileItem';
 
 const ProfileList = ({ profiles, loading }) => {
   return (
     <div className="profile-list">
       {loading ? (
-        <Spinner />
+        <Loader />
       ) : (
         <Fragment>
           <h2>Profiles</h2>

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getBlog, deleteBlog, getBlogs } from '../actions/blogActions';
 
-import Blog from '../components/blogs/Blog';
+import Blog from '../components/layout/blogs/Blog';
 
 const BlogContainer = ({
   blog: { blog, loading },
