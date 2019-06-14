@@ -9,5 +9,3 @@ const setAuthToken = token => {
 };
 
 export default setAuthToken;
-
-// TODO: Was axios.defaults.headers.common['Authorization'] first, look up difference.

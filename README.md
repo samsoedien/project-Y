@@ -12,6 +12,7 @@ TODO: (backend)
 - Decide on seperating responses for validation specific errors
 - Flash validation form errors to frontend
 - Send email for confirming registration
+- Create stronger encrypted secret keys
 
 TODO: (frontend)
 
@@ -27,6 +28,7 @@ TODO: (frontend)
 - Rewrite CreateProfile component to have logic for both create and edit functionality using ternary operator
 - Check for consistency in ProfileList, PostFeed and BlogList components
 - When logging in on a specific page, redirect where the user was originally
+- Rewrite containers with mapDispatchToProps?
 
 - Design Language System (DLS):
   - Setup a Style Guide in Readme

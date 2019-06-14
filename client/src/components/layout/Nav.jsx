@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logoutUser } from '../../actions/authActions';
 
@@ -8,9 +8,9 @@ const Nav = ({ auth: { isAuthenticated, loading }, logoutUser }) => {
   const authLinks = (
     <ul>
       <li>
-        <Link to="/dashboard">
+        <NavLink to="/dashboard">
           <i className="fas fa-user">Dashboard</i>
-        </Link>
+        </NavLink>
       </li>
       <li>
         <a onClick={logoutUser} href="#!">
@@ -23,25 +23,25 @@ const Nav = ({ auth: { isAuthenticated, loading }, logoutUser }) => {
   const guestLinks = (
     <ul>
       <li>
-        <Link to="/register">Register</Link>
+        <NavLink to="/register">Register</NavLink>
       </li>
       <li>
-        <Link to="/login">Login</Link>
+        <NavLink to="/login">Login</NavLink>
       </li>
     </ul>
   );
   return (
     <nav className="navbar bg-dark">
       <h1>
-        <Link to="/">
+        <NavLink to="/">
           <i className="fas fa-code" /> Navbar
-        </Link>
+        </NavLink>
       </h1>
       <ul>
         <li>
-          <Link to="/profiles">Profiles</Link>
-          <Link to="/blogs">Blogs</Link>
-          <Link to="/posts">Posts</Link>
+          <NavLink to="/profiles">Profiles</NavLink>
+          <NavLink to="/blogs">Blogs</NavLink>
+          <NavLink to="/posts">Posts</NavLink>
         </li>
       </ul>
       {!loading && (

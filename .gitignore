@@ -63,3 +63,4 @@ typings/
 # custom rules
 package-lock.json
 server/config/default.json
+server/config/keys/keys_dev.js

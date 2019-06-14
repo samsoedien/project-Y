@@ -19,48 +19,19 @@ const theme = createMuiTheme({
       light: grey[100],
     },
   },
-  typography: {
-    useNextVariants: true,
-    fontFamily: [
-      'Roboto',
-      'Montserrat',
-    ].join(','),
-    // fontSize: {},
-    // headline: {},
-    // title: {},
-    // subheading: {},
-    // body1: {},
-    // body2: {},
-    // caption: {},
-    // button: {},
-    // h1: {},
-    h1: {
-      textAlign: 'center',
-      fontSize: '8rem',
-      fontFamily: 'Timberline',
-    },
-    h2: {
-      fontFamily: '"Great Vibes", cursive',
-      fontSize: '6rem',
-    },
-    h3: {
-      fontFamily: '"Great Vibes", cursive',
-      fontSize: '6rem',
-    },
-    h4: {
-      fontFamily: '"Montserrat", san-serif',
-      fontWeight: 600,
-      fontSize: '1.5em',
-      color: brown[600],
-
-      // textTransform: 'uppercase',
-    },
-    body1: {
-      fontFamily: '"Montserrat", sans-serif',
-      fontWeight: '300',
-      fontSize: '1rem',
-    },
-  },
+  // typography: {
+  //   useNextVariants: true,
+  //   fontFamily: ['Roboto', 'Montserrat'].join(','),
+  //   // fontSize: {},
+  //   // headline: {},
+  //   // title: {},
+  //   // subheading: {},
+  //   // body1: {},
+  //   // body2: {},
+  //   // caption: {},
+  //   // button: {},
+  //   // h1: {},
+  // },
 });
 
 export default theme;

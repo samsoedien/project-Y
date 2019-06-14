@@ -1,53 +1,37 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
-
-import jwtDecode from 'jwt-decode';
 import { MuiThemeProvider } from '@material-ui/core';
-import setAuthToken from './utils/setAuthToken';
+
 import { loadUser } from './actions/authActions';
-import { setCurrentUser, logoutUser } from './actions/authActions';
-import { clearCurrentProfile } from './actions/profileActions';
-import { CssBaseline } from '@material-ui/core';
+import setAuthToken from './utils/setAuthToken';
+import PrivateRoute from './components/wrappers/PrivateRoute';
 import store from './store/store';
 import theme from './theme/theme';
-import logo from './logo.svg';
-import './App.css';
-// import './App.scss';
+// import logo from './logo.svg';
+import './App.scss';
 
-import Routes from './Routes';
-import Navbar from './components/layout/Navbar';
-import HeaderContainer from './containers/HeaderContainer';
-// import FooterContainer from './containers/FooterContainer';
-
-import Alert from './components/layout/Alert';
 import Nav from './components/layout/Nav';
+import Alert from './components/layout/Alert';
 import Landing from './components/layout/Landing';
+
+// import HeaderContainer from './containers/HeaderContainer';
+// import FooterContainer from './containers/FooterContainer';
+import AuthContainer from './containers/AuthContainer';
+import DashboardContainer from './containers/DashboardContainer';
+import DeviceFormContainer from './containers/DeviceFormContainer';
+import ProfileContainer from './containers/ProfileContainer';
+import ProfileListContainer from './containers/ProfileListContainer';
+import ProfileFormContainer from './containers/ProfileFormContainer';
+import ProfileUpdateContainer from './containers/ProfileUpdateContainer';
+import PostContainer from './containers/PostContainer';
+// import BlogContainer from './containers/BlogContainer';
+import BlogFormContainer from './containers/BlogFormContainer';
+import BlogListContainer from './containers/BlogListContainer';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
-
-// // Check for token
-// if (localStorage.jwtToken) {
-//   // Set auth token header auth
-//   setAuthToken(localStorage.jwtToken);
-//   // Decode token and get user info and exp
-//   const decoded = jwtDecode(localStorage.jwtToken);
-//   // Set user and isAuthenticated
-//   store.dispatch(setCurrentUser(decoded));
-
-//   // Check for expired token
-//   const currentTime = Date.now() / 1000;
-//   if (decoded.exp < currentTime) {
-//     // Logout user
-//     store.dispatch(logoutUser());
-//     // Clear current Profile
-//     store.dispatch(clearCurrentProfile());
-//     // Redirect to login
-//     window.location.href = '/login';
-//   }
-// }
 
 const App = () => {
   useEffect(() => {
@@ -55,37 +39,53 @@ const App = () => {
   }, []);
   return (
     <Provider store={store}>
-      <Router>
-        <Fragment>
-          <CssBaseline />
-          <Nav />
-          <main className="app-main">
-            <Alert />
-            <Routes />
-          </main>
-        </Fragment>
-      </Router>
+      <MuiThemeProvider theme={theme}>
+        <Router>
+          <div className="app">
+            <Nav />
+            <main className="app-main">
+              <Alert />
+              <Switch>
+                <Route exact path="/" component={Landing} />
+                <Route
+                  path="/register"
+                  render={() => <AuthContainer hasAccount={false} />}
+                />
+                <Route
+                  path="/login"
+                  render={() => <AuthContainer hasAccount={true} />}
+                />
+                <Route path="/profiles" component={ProfileListContainer} />
+                <Route path="/profiles/:id" component={ProfileContainer} />
+                <PrivateRoute
+                  path="/dashboard"
+                  component={DashboardContainer}
+                />
+                <PrivateRoute
+                  path="/add-device"
+                  component={DeviceFormContainer}
+                />
+                <PrivateRoute
+                  path="/create-profile"
+                  component={ProfileFormContainer}
+                />
+                <PrivateRoute
+                  path="/edit-profile"
+                  component={ProfileUpdateContainer}
+                />
+                <PrivateRoute path="/posts" component={PostContainer} />
+                <Route path="/blogs" component={BlogListContainer} />
+                <PrivateRoute
+                  path="/create-blog"
+                  component={BlogFormContainer}
+                />
+              </Switch>
+            </main>
+          </div>
+        </Router>
+      </MuiThemeProvider>
     </Provider>
   );
 };
-// const App = () => (
-//   <Provider store={store}>
-//     <MuiThemeProvider theme={theme}>
-//       <Router>
-//         <div className="app">
-//           <HeaderContainer />
-//           {/* <Switch>
-//             <Route exact path="/home" component={HeaderContainer} />
-//             <Route path="/" render={() => <HeaderContainer onHomepage={false} />} />
-//           </Switch> */}
-//           <main className="app-main">
-//             <Routes />
-//           </main>
-//           {/* <FooterContainer /> */}
-//         </div>
-//       </Router>
-//     </MuiThemeProvider>
-//   </Provider>
-// );
 
 export default App;
