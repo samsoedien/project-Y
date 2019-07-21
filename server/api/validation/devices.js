@@ -1,7 +1,7 @@
-const { check } = require('express-validator/check');
+const { body } = require('express-validator');
 
 module.exports = [
-  check('name', 'Name is required')
+  body('name', 'Name is required')
     .not()
     .isEmpty(),
 ];
